@@ -35,13 +35,15 @@ app.use(express.json()); // makes req.body not undefined IMPORTANT //
 // "/"
 // serve the html and js of our react app (dist folder)
 
-app.get('/fruits', (req, res) => {
-    //res.send(fruits);
+app.get('/fruits', async (req, res) => {
+    let fruitsFromDB = Fruit.find();
+    res.send(fruitsFromDB);
 })
 
 app.post('/fruits', (req, res) => {
     const newFruit = req.body;
-    Fruit.create(fruit);
+    // this gives us a Promise as well (practically... speaking?)
+    Fruit.create(newFruit);
     res.status(201).send(newFruit);
 })
 
