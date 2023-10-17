@@ -8,12 +8,8 @@ function App() {
   return (
     <>
       <nav>
-        <button>
-          <Link to="/">Home</Link>
-        </button>
-        <button>
-          <Link to="/create">Create</Link>
-        </button>
+        <Link to="/">Home</Link>
+        <Link to="/create">Create</Link>
       </nav>
       <Routes>
         <Route path="/" element={<Fruits />} />
