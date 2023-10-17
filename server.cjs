@@ -7,7 +7,12 @@ const morgan = require('morgan')
 const PORT = 3000;
 const app = express();
 
-const fruits = [];
+const Fruit = require('./models/Fruit.cjs')
+
+// allows us to use process.env
+require('dotenv').config();
+
+require('./config/db.cjs'); 
 
 // start of middleware //
 const middleware = (req, res, next) => {
@@ -19,7 +24,7 @@ app.use(cors({
     origin: "*"
 }))
 
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 app.use(middleware);
 
@@ -31,12 +36,12 @@ app.use(express.json()); // makes req.body not undefined IMPORTANT //
 // serve the html and js of our react app (dist folder)
 
 app.get('/fruits', (req, res) => {
-    res.send(fruits);
+    //res.send(fruits);
 })
 
 app.post('/fruits', (req, res) => {
     const newFruit = req.body;
-    fruits.push(newFruit);
+    Fruit.create(fruit);
     res.status(201).send(newFruit);
 })
 
